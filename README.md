@@ -8,7 +8,7 @@ and on [GitHub].
 You are also encouraged to follow the development in more detail at [first steps], [Developing Grafana Worldmap NG]
 and by reading the [changelog].
 
-[changelog]: https://github.com/panodata/panodata-map-panel/blob/develop/CHANGELOG.md
+[changelog]: https://github.com/panodata/panodata-map-panel/blob/main/CHANGELOG.md
 [Developing Grafana Worldmap NG]: https://community.hiveeyes.org/t/grafana-worldmap-panel-ng/1824
 [first steps]: https://github.com/grafana/worldmap-panel/issues/197
 [GitHub]: https://github.com/panodata/panodata-map-panel
@@ -300,7 +300,7 @@ The threshold field also accepts 2 or more comma-separated values. For example, 
 
 Optionally, you can show an image over the base map (but below the data points). This could be useful, for example, to show a more detailed/up-to-date image of the area of interest, in case the map provider only has old or low-resolution images. See below for an example of displaying interpolated sensor data (for example, temperatures in a field while only knowing the temperatures at a few sensors).
 
-![Image overlay example](https://raw.githubusercontent.com/panodata/panodata-map-panel/develop/src/images/overlay_example.png)
+![Image overlay example](https://raw.githubusercontent.com/panodata/panodata-map-panel/main/src/images/overlay_example.png)
 
 **Enable overlay**
 
@@ -326,4 +326,4 @@ Specify the limits of the image in the map. Enter the minimum and maximum latitu
 
 ### CHANGELOG
 
-The latest changes can be found here: [CHANGELOG.md](https://github.com/panodata/panodata-map-panel/blob/develop/CHANGELOG.md)
+The latest changes can be found here: [CHANGELOG.md](https://github.com/panodata/panodata-map-panel/blob/main/CHANGELOG.md)

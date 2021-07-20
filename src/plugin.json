@@ -16,7 +16,7 @@
     },
     "links": [
       {"name": "Project site", "url": "https://github.com/panodata/panodata-map-panel"},
-      {"name": "MIT License", "url": "https://github.com/panodata/panodata-map-panel/blob/develop/LICENSE"}
+      {"name": "MIT License", "url": "https://github.com/panodata/panodata-map-panel/blob/main/LICENSE"}
     ],
     "screenshots": [
       {"name": "World", "path": "images/worldmap-world.png"},
