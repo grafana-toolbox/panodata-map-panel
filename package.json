@@ -16,8 +16,8 @@
     "worldmap",
     "leaflet"
   ],
-  "author": "Grafana Labs",
-  "license": "MIT",
+  "author": "Grafana Labs, The Panodata Developers",
+  "license": "AGPL-3.0-only",
   "devDependencies": {
     "@grafana/e2e": "^7.3.1",
     "@grafana/toolkit": "^7.3.1",

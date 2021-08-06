@@ -6,7 +6,7 @@
   "info": {
     "description": "Panodata Map Panel, a descendant of the original Grafana Worldmap Panel. Displays time series data or geohash data on a world map.",
     "author": {
-      "name": "Grafana Labs",
+      "name": "Grafana Labs, The Panodata Developers",
       "url": "https://grafana.com"
     },
     "keywords": ["grafana", "map", "panel", "plugin", "worldmap", "leaflet"],
@@ -15,9 +15,9 @@
       "large": "images/worldmap_logo.svg"
     },
     "links": [
-      {"name": "MIT License", "url": "https://github.com/panodata/panodata-map-panel/blob/main/LICENSE"},
       {"name": "Website", "url": "https://community.panodata.org/t/panodata-map-panel-for-grafana/121"},
-      {"name": "GitHub", "url": "https://github.com/panodata/panodata-map-panel"}
+      {"name": "GitHub", "url": "https://github.com/panodata/panodata-map-panel"},
+      {"name": "License", "url": "https://github.com/panodata/panodata-map-panel/blob/main/LICENSE"}
     ],
     "screenshots": [
       {"name": "World", "path": "images/worldmap-world.png"},
