@@ -99,7 +99,9 @@ export default class DataFormatter {
         const delimiters = '._-';
         let ind = str.length - 1;
         for (; ind >= 0; ind--) {
-          if (delimiters.indexOf(str.charAt(ind)) >= 0) break;
+          if (delimiters.indexOf(str.charAt(ind)) >= 0) {
+            break;
+          }
         }
         return ind;
       };
@@ -113,7 +115,9 @@ export default class DataFormatter {
           let ind = _lastIndexOfDelimiters(aliasCap);
           if (ind <= 0) {
             location = locMap['UNKNOWN'];
-            if (location) break;
+            if (location) {
+              break;
+            }
             return;
           }
           aliasCap = aliasCap.substr(0, ind);
