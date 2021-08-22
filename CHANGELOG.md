@@ -1,6 +1,8 @@
 # Changelog
 
 ## development
+- Made circle area (instead of radius) to be linear in data value.
+- Added 'kMGTP' unit to the data value
 
 ## v0.16.0
 - Add compatibility with Grafana 8
