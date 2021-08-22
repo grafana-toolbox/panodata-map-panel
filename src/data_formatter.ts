@@ -87,17 +87,37 @@ export default class DataFormatter {
     if (seriesData && seriesData.length > 0) {
       let highestValue = 0;
       let lowestValue = Number.MAX_VALUE;
+      let locMap = {};
+      this.ctrl.locations.forEach(loc => {
+        let keys = _.isArray(loc.key) ? loc.key : [loc.key];
+        keys.forEach(key => {
+          locMap[key.toUpperCase()] = loc;
+        });
+      });
+
+      let _lastIndexOfDelimiters = function(str) {
+        const delimiters = '._-';
+        let ind = str.length - 1;
+        for (; ind >= 0; ind--) {
+          if (delimiters.indexOf(str.charAt(ind)) >= 0) break;
+        }
+        return ind;
+      };
 
       seriesData.forEach(serie => {
         const lastPoint = _.last(serie.datapoints);
         const lastValue = _.isArray(lastPoint) ? lastPoint[0] : null;
-        const location = _.find(this.ctrl.locations, loc => {
-          return loc.key.toUpperCase() === serie.alias.toUpperCase();
-        });
-
-        // Todo: Propagate user-level notification?
-        if (!location) {
-          return;
+        let aliasCap = serie.alias.toUpperCase();
+        let location = locMap[aliasCap];
+        while (!location) {
+          let ind = _lastIndexOfDelimiters(aliasCap);
+          if (ind <= 0) {
+            location = locMap['UNKNOWN'];
+            if (location) break;
+            return;
+          }
+          aliasCap = aliasCap.substr(0, ind);
+          location = locMap[aliasCap];
         }
 
         if (_.isString(lastValue)) {

@@ -228,6 +228,13 @@
             The time series (group by) name should be a 3-letter country code.
             For example "USA" for United States or "FRA" for France.</p>
     </div>
+    <div ng-show="ctrl.panel.locationData === 'world_regions'">
+        <h5>Mapping time series data</h5>
+        <p class="grafana-info-box">
+            The query should be formatted as <b>time series data</b>.
+            The time series (group by) name should be a 2-letter country code with optional region code.
+            For example: CN_Beijing or CN-BJ for Beijing in China.</p>
+    </div>
     <div ng-show="ctrl.panel.locationData === 'states'">
         <h5>Mapping time series data</h5>
         <p class="grafana-info-box">
