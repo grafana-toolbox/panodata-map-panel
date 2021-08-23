@@ -142,9 +142,9 @@ Supported Databases:
 
 The following location files are included in the plugin:
 
-- Countries (2 letter codes)
-- Countries (3 letter codes)
-- World Regions (2 letter country codes with 2-letter codes for states in the US and provinces in China)
+- Countries (2-letter codes)
+- Countries (3-letter codes)
+- World Regions (2-letter country codes with 2-letter codes for states in the US and provinces in China)
 - US states
 
 Alternatively, you can provide your own location lists by using:
@@ -152,11 +152,11 @@ Alternatively, you can provide your own location lists by using:
 - A JSON endpoint that returns a list of locations
 - A JSONP endpoint that returns a list of locations
 
-This works by matching country codes (like US or GB or FR) or US state codes (TX or NY) to a metric name. If a metric name matches a country in the list of countries then a circle will be drawn at that location.
+This works by matching country codes (like US or GB or FR) or US state codes (TX or NY) to a metric name. Hierarchical metric name is supported and the different levels should be delimitded by '.', '-' or '\_'. If a metric name matches a key in the location file then a circle will be drawn at that location. The longest match at the delimiter boundary wins. The key "Unknown" will match all the otherwise unmatched data. The build-in map "World Regions" supports 2-letter country codes with the states in the US and provinces in China.
 
 If you want to match to other data than countries or states, then you will have to provide custom location data. The current way to do that is via a JSON endpoint that returns a json file with location data (See Map Data Options)
 
-The size of the circle depends on the value of the matched metric. Circle size is relative e.g. if you have 3 countries with values 1, 2 and 3 or 100, 200 and 300 then you will get one small circle, one medium circle and one large circle.
+The size of the circle depends on the value of the matched metric. Circle size is relative and the area is linear to the value e.g. if you have 3 countries with values 1, 2 and 3 or 100, 200 and 300 then you will get one small circle, one medium circle and one large circle.
 
 ### Time Series - Graphite and InfluxDB
 
