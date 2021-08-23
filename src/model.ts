@@ -75,6 +75,12 @@ export const LocationSources = [
     format: LocationFormat.Timeseries,
   },
   {
+    id: 'world_regions',
+    label: '2-letter country codes with optional region code',
+    type: LocationType.TimeseriesBuiltin,
+    format: LocationFormat.Timeseries,
+  },
+  {
     id: 'states',
     label: '2-letter US state codes',
     type: LocationType.TimeseriesBuiltin,

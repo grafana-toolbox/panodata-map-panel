@@ -46,7 +46,8 @@ Time Series data contains a timestamp, a metric name and a numeric value. In oth
 ```json
 [
   {"target": "SE", "datapoints": [[183255.0, 1529755200]]},
-  {"target": "US", "datapoints": [[192224.0, 1529755200]]}
+  {"target": "US", "datapoints": [[192224.0, 1529755200]]},
+  {"target": "US.CA.PaloAlto", "datapoints": [[3922.0, 1529755200]]}
 ]
 ```
 
@@ -65,11 +66,37 @@ Location data should be in the JSON format and should be an array of JSON object
     "latitude": 37.09024,
     "longitude": -95.712891,
     "name": "United States"
+  },
+  {
+    "key": [
+      "US.CA",
+      "US-CA",
+      "US_California"
+    ],
+    "latitude": 36.17,
+    "longitude": -119.7462,
+    "name": "California"
+  },
+  {
+    "key": [
+      "US.IA",
+      "US-IA",
+      "US_Iowa"
+    ],
+    "latitude": 42.0046,
+    "longitude": -93.214,
+    "name": "Iowa"
+  },
+  {
+    "key": "Unknown",
+    "latitude": 66,
+    "longitude": 66,
+    "name": "Unknown"
   }
 ]
 ```
 
-The metric name (target in the example data) will be matched with a key field from the location data. With this example data there will be two circles drawn on the map, one for Sweden and one for the United States with values 183255 and 192224.
+The metric name (target in the example data) will be matched with a key field from the location data. With this example data there will be three circles drawn on the map, one for Sweden, one for the United States and one for California with values 183255, 192224 and 3922.
 
 ### Table Format
 
@@ -115,8 +142,9 @@ Supported Databases:
 
 The following location files are included in the plugin:
 
-- Countries (2 letter codes)
-- Countries (3 letter codes)
+- Countries (2-letter codes)
+- Countries (3-letter codes)
+- World Regions (2-letter country codes with 2-letter codes for states in the US and provinces in China)
 - US states
 
 Alternatively, you can provide your own location lists by using:
@@ -124,11 +152,11 @@ Alternatively, you can provide your own location lists by using:
 - A JSON endpoint that returns a list of locations
 - A JSONP endpoint that returns a list of locations
 
-This works by matching country codes (like US or GB or FR) or US state codes (TX or NY) to a metric name. If a metric name matches a country in the list of countries then a circle will be drawn at that location.
+This works by matching country codes (like US or GB or FR) or US state codes (TX or NY) to a metric name. Hierarchical metric name is supported and the different levels should be delimitded by '.', '-' or '\_'. If a metric name matches a key in the location file then a circle will be drawn at that location. The longest match at the delimiter boundary wins. The key "Unknown" will match all the otherwise unmatched metric names. The build-in map "World Regions" supports 2-letter country codes with the states in the US and provinces in China.
 
 If you want to match to other data than countries or states, then you will have to provide custom location data. The current way to do that is via a JSON endpoint that returns a json file with location data (See Map Data Options)
 
-The size of the circle depends on the value of the matched metric. Circle size is relative e.g. if you have 3 countries with values 1, 2 and 3 or 100, 200 and 300 then you will get one small circle, one medium circle and one large circle.
+The size of the circle depends on the value of the matched metric. Circle size is relative and the area is linear to the value e.g. if you have 3 countries with values 1, 2 and 3 or 100, 200 and 300 then you will get one small circle, one medium circle and one large circle.
 
 ### Time Series - Graphite and InfluxDB
 
@@ -237,8 +265,9 @@ There are four ways to provide data to this plugin:
 
  - *countries*: This is a list of all the countries in the world. It works by matching a country code (US, FR, AU) to a node alias in a time series query.
  - *states*: Similar to countries but for the states in USA e.g. CA for California
+ - *world_regions*: On top of countries, added states in USA and provinces in China with hierarchical keys e.g. US.CA for California, CN.GD for Guangdong.
  - *geohash*: An ElasticSearch query that returns geohashes.
- - *json*: A json endpoint that returns custom json. Examples of the format are the [countries data used in first option](https://github.com/grafana/worldmap-panel/blob/master/src/data/countries.json) or [this list of cities](https://github.com/grafana/worldmap-panel/blob/master/src/data/probes.json).
+ - *json*: A json endpoint that returns custom json. Examples of the format are the [countries data used in first option](https://github.com/grafana/worldmap-panel/blob/master/src/data/countries.json) or [this list of world_regions](https://github.com/panodata/panodata-map-panel/blob/main/src/data/world_regions.json).
  - *jsonp*: A jsonp endpoint that returns custom json wrapped as jsonp. Use this if you are having problems with CORS.
  - *table*: This expects the metric query to return data points with a field named geohash or two fields/columns named `latitude` and `longitude`. This field should contain a string in the [geohash form](https://www.elastic.co/guide/en/elasticsearch/guide/current/geohashes.html). For example: London -> "gcpvh3zgu992".
 

@@ -347,9 +347,27 @@ export default class WorldMap {
     }
 
     const dataFactor = (dataPointValue - this.ctrl.data.lowestValue) / this.ctrl.data.valueRange;
-    const circleSizeRange = circleMaxSize - circleMinSize;
+    const circleSizeRange = (circleMaxSize - circleMinSize) * (circleMaxSize + circleMinSize);
 
-    return circleSizeRange * dataFactor + circleMinSize;
+    return Math.sqrt(circleSizeRange * dataFactor + circleMinSize * circleMinSize);
+  }
+
+  addUnit(n) {
+    const Units = 'kMGTPEZY';
+    let e = -1;
+    while (n >= 1000 && e < Units.length - 1) {
+      n = Math.round(n) / 1000;
+      e++;
+    }
+    if (n >= 100) {
+      n = Math.round(n * 10) / 10;
+    } else if (n >= 10) {
+      n = Math.round(n * 100) / 100;
+    }
+    if (e >= 0) {
+      n += Units.charAt(e);
+    }
+    return n;
   }
 
   createClickthrough(circle, dataPoint) {
@@ -432,7 +450,7 @@ export default class WorldMap {
     if (this.ctrl.settings.formatOmitEmptyValue && value === 'n/a') {
       return `${locationName}`.trim();
     } else {
-      return `${locationName}: ${value} ${unit || ''}`.trim();
+      return `${locationName}: ${this.addUnit(value)} ${unit || ''}`.trim();
     }
   }
 

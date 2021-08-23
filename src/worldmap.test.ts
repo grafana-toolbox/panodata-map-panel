@@ -27,6 +27,19 @@ describe('Worldmap', () => {
     });
   });
 
+  describe('when the data value is too big', () => {
+    it('should keep 4 significant digits and append k,M,G etc', () => {
+      expect(worldMap.addUnit(123)).toBe(123);
+      expect(worldMap.addUnit(1234)).toBe('1.234k');
+      expect(worldMap.addUnit(12345)).toBe('12.35k');
+      expect(worldMap.addUnit(123456789)).toBe('123.5M');
+      expect(worldMap.addUnit(643456343745345642)).toBe('643.5P');
+      expect(worldMap.addUnit(7653643456343745345642)).toBe('7.654Z');
+      expect(worldMap.addUnit(999999653643456343745345642)).toBe('1000Y');
+      expect(worldMap.addUnit(79999999653643456343745345642)).toBe('80000Y');
+    });
+  });
+
   describe('when the data has one point', () => {
     beforeEach(() => {
       ctrl.data = new DataBuilder()
@@ -161,7 +174,7 @@ describe('Worldmap', () => {
     });
 
     it('should create a circle with circle size 6 for mid value size', () => {
-      expect(worldMap.circles[1].options.radius).toBe(6);
+      expect(worldMap.circles[1].options.radius).toBe(Math.sqrt(52));
     });
 
     it('should create a circle with max circle size for largest value size', () => {
