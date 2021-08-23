@@ -355,7 +355,7 @@ export default class WorldMap {
   addUnit(n) {
     const Units = 'kMGTPEZY';
     let e = -1;
-    while (n >= 1000) {
+    while (n >= 1000 && e < Units.length - 1) {
       n = Math.round(n) / 1000;
       e++;
     }
