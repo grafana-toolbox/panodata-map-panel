@@ -38,6 +38,7 @@ const panelDefaults = {
   unitSingular: '',
   unitPlural: '',
   showLegend: true,
+  reverseLegend: false,
   legendContainerSelector: null,
   showZoomControl: true,
   showAttribution: true,
@@ -556,6 +557,10 @@ export default class WorldmapCtrl extends MetricsPanelCtrl {
       this.map.removeLegend();
     }
     this.render();
+  }
+
+  toggleLegendDirection() {
+    this.map.legend.update();
   }
 
   refreshOverlay() {

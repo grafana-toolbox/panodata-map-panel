@@ -126,23 +126,37 @@ export default class WorldMap {
       default:
         return () => {
           const thresholds = this.ctrl.data.thresholds;
-          let legendHtml = '';
-          legendHtml +=
-            '<div class="legend-item"><i style="background:' +
-            this.ctrl.settings.colors[0] +
-            '"></i> ' +
-            '&lt; ' +
-            thresholds[0] +
-            '</div>';
+          const colors = this.ctrl.settings.colors;
+
+          let labels: string[] = [];
+
+          labels.push(`
+              <div class="legend-item">
+                  <i style="background: ${colors[0]}"></i>
+                  &lt; ${thresholds[0]}
+              </div>            
+          `);
+
           for (let index = 0; index < thresholds.length; index += 1) {
-            legendHtml +=
-              '<div class="legend-item"><i style="background:' +
-              this.ctrl.settings.colors[index + 1] +
-              '"></i> ' +
-              thresholds[index] +
-              (thresholds[index + 1] ? '&ndash;' + thresholds[index + 1] + '</div>' : '+');
+            let next = '+';
+
+            if (thresholds[index + 1]) {
+              next = ' &ndash; ' + thresholds[index + 1];
+            }
+
+            labels.push(`
+              <div class="legend-item">
+                  <i style="background: ${colors[index + 1]}"></i>
+                  ${thresholds[index]}${next}
+              </div>
+            `);
           }
-          this.legend._div.innerHTML = legendHtml;
+
+          if (this.ctrl.settings.reverseLegend) {
+            labels.reverse();
+          }
+
+          this.legend._div.innerHTML = labels.join('');
         };
     }
   }

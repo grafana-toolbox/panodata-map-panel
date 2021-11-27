@@ -412,11 +412,17 @@
     <div class="gf-form-subgroup">
         <gf-form-switch class="gf-form" label="Show Legend" label-class="width-10" checked="ctrl.panel.showLegend"
                         on-change="ctrl.toggleLegend()"></gf-form-switch>
-        <div class="gf-form" ng-show="ctrl.panel.showLegend == true">
-            <label class="gf-form-label width-10">Legend container</label>
-            <input type="text" class="input-small gf-form-input max-width-18"
-                   ng-model="ctrl.panel.legendContainerSelector"
-                   placeholder=".shared-map-legend" ng-change="ctrl.restart()" ng-model-onblur/>
+
+        <div ng-show="ctrl.panel.showLegend == true">
+            <gf-form-switch class="gf-form" label="Reverse Legend" label-class="width-10" checked="ctrl.panel.reverseLegend"
+                            on-change="ctrl.toggleLegendDirection()"></gf-form-switch>
+
+            <div class="gf-form">
+                <label class="gf-form-label width-10">Legend container</label>
+                <input type="text" class="input-small gf-form-input max-width-18"
+                       ng-model="ctrl.panel.legendContainerSelector"
+                       placeholder=".shared-map-legend" ng-change="ctrl.restart()" ng-model-onblur/>
+            </div>
         </div>
     </div>
 
